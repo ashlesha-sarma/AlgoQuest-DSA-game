@@ -46,7 +46,7 @@ async function request(path, options = {}) {
     return data;
   } catch (error) {
     if (error instanceof TypeError) {
-      throw new Error('Unable to reach the backend. Make sure it is running on http://localhost:5000.');
+      throw new Error('Unable to connect to the AlgoQuest service. Please try again later.');
     }
 
     throw error;
