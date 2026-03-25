@@ -29,8 +29,16 @@ html, body {
   font-family: 'VT323', monospace;
   background: var(--bg);
   color: var(--cream);
-  min-height: 100vh;
-  overflow-x: hidden;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+}
+
+.page-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .pixel-art {

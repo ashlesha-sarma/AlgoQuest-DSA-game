@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { api, clearSession, saveSession } from "../lib/api";
-import { WoodPanel, Parchment, PxBtn, PxInput, Divider, FarmerSprite } from "./ui";
+import { WoodPanel, Parchment, PxBtn, PxInput, Divider, TreeLogo } from "./ui";
 
 /* ═══════════════════════════════════════════════
    LOGIN PAGE
@@ -42,17 +42,17 @@ export default function LoginPage({ onLogin, initialError = '' }) {
   };
 
   return (
-    <div style={{ minHeight:'100vh', display:'flex', alignItems:'center', justifyContent:'center', padding:16, position:'relative', zIndex:1 }}>
-      <div style={{ width:'100%', maxWidth:400 }}>
+    <div style={{ height:'100%', display:'flex', alignItems:'center', justifyContent:'center', padding:12, position:'relative', zIndex:1, overflow:'hidden' }}>
+      <div style={{ width:'100%', maxWidth:380 }}>
         {/* Logo */}
-        <div style={{ textAlign:'center', marginBottom:24 }}>
+        <div style={{ textAlign:'center', marginBottom:12 }}>
           <div style={{ fontSize:18, color:'#ffd700', letterSpacing:4, marginBottom:4 }}>✦ ✦ ✦</div>
           <div style={{ fontSize:52, color:'#ffd700', textShadow:'3px 3px 0 #e65100, 6px 6px 0 rgba(0,0,0,.4)' }}>
             AlgoQuest
           </div>
           <div style={{ fontSize:20, color:'#d7ccc8', letterSpacing:2 }}>A PIXEL DSA ADVENTURE</div>
           <div style={{ marginTop:12 }} className="anim-float">
-            <FarmerSprite sz={4} />
+            <TreeLogo size={160} />
           </div>
         </div>
 

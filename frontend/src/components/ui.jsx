@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import treeImg from "./algoquest_tree-final.png";
 
 /* ═══════════════════════════════════════════════
    PLAYER SPRITE — 8×12 pixel art farmer
@@ -106,5 +107,20 @@ export function FeedbackBanner({ msg, type }) {
     }}>
       {type === 'success' ? '✅ ' : type === 'error' ? '❌ ' : 'ℹ️ '}{msg}
     </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════
+   TREE LOGO — replaces pixel farmer on non-game screens
+═══════════════════════════════════════════════ */
+export function TreeLogo({ size = 80, style }) {
+  const src = typeof treeImg === 'object' ? treeImg.src : treeImg;
+  return (
+    <img
+      src={src}
+      alt="AlgoQuest"
+      className="pixel-art"
+      style={{ width: size, height: size, objectFit: 'contain', imageRendering: 'pixelated', ...style }}
+    />
   );
 }

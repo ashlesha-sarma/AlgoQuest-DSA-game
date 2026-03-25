@@ -116,7 +116,7 @@ export default function AlgoQuest() {
 
   // ── Render ────────────────────────────────────────
   return (
-    <div style={{ minHeight:'100vh', background:'#1a0e05', position:'relative' }}>
+    <div className="page-container" style={{ background:'#1a0e05', position:'relative' }}>
       <StarBg />
 
       {/* XP Popups */}

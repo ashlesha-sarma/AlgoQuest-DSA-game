@@ -1,4 +1,4 @@
-import { WoodPanel, Parchment, PxBtn, ProgBar, FarmerSprite, Divider, SPRITE_C } from "./ui";
+import { WoodPanel, Parchment, PxBtn, ProgBar, TreeLogo, Divider, SPRITE_C } from "./ui";
 import { WORLDS } from "../utils/userUtils";
 
 /* ═══════════════════════════════════════════════
@@ -20,11 +20,11 @@ export default function Dashboard({ user, onNavigate, onLogout }) {
   const tip = TIPS[Math.floor(Date.now() / 5000) % TIPS.length];
 
   return (
-    <div style={{ minHeight:'100vh', padding:'16px', position:'relative', zIndex:1 }}>
+    <div style={{ height:'100%', padding:'12px', position:'relative', zIndex:1, display:'flex', flexDirection:'column' }}>
       {/* Top nav */}
       <WoodPanel style={{ marginBottom:16, display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:10 }}>
         <div style={{ display:'flex', alignItems:'center', gap:12 }}>
-          <FarmerSprite sz={2} walk />
+          <TreeLogo size={80} />
           <div>
             <div style={{ fontSize:26, color:SPRITE_C[6] }}>AlgoQuest</div>
             <div style={{ fontSize:16, color:'#d7ccc8' }}>Welcome, {user.name}!</div>
@@ -40,7 +40,7 @@ export default function Dashboard({ user, onNavigate, onLogout }) {
         </div>
       </WoodPanel>
 
-      <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))', gap:16, maxWidth:1000, margin:'0 auto' }}>
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(200px,1fr))', gap:10, maxWidth:1000, margin:'0 auto', flex:1 }}>
         {/* XP & Progress */}
         <WoodPanel>
           <Parchment>
