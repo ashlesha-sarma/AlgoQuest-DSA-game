@@ -24,10 +24,10 @@ export default function Dashboard({ user, onNavigate, onLogout }) {
       {/* Top nav */}
       <WoodPanel style={{ marginBottom:16, display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:10 }}>
         <div style={{ display:'flex', alignItems:'center', gap:12 }}>
-          <TreeLogo size={80} />
+          <TreeLogo size={120} />
           <div>
-            <div style={{ fontSize:26, color:SPRITE_C[6] }}>AlgoQuest</div>
-            <div style={{ fontSize:16, color:'#d7ccc8' }}>Welcome, {user.name}!</div>
+            <div style={{ fontSize:42, color:SPRITE_C[6], lineHeight:1 }}>AlgoQuest</div>
+            <div style={{ fontSize:22, color:'#d7ccc8' }}>Welcome, {user.name}!</div>
           </div>
         </div>
         <div style={{ display:'flex', gap:12, alignItems:'center' }}>
@@ -40,9 +40,10 @@ export default function Dashboard({ user, onNavigate, onLogout }) {
         </div>
       </WoodPanel>
 
-      <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(200px,1fr))', gap:10, maxWidth:1000, margin:'0 auto', flex:1 }}>
+      {/* Layer 1: Progress */}
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(2, 1fr)', gap:10, maxWidth:1100, margin:'0 auto', width:'100%', marginBottom:16 }}>
         {/* XP & Progress */}
-        <WoodPanel>
+        <WoodPanel style={{ boxShadow:'0 0 0 3px #4e342e', border:'none', padding:10 }}>
           <Parchment>
             <div style={{ fontSize:22, marginBottom:8 }}>⭐ XP Progress</div>
             <div style={{ fontSize:36, color:'#5d4037', marginBottom:4 }}>{user.xp} / ∞ XP</div>
@@ -55,7 +56,7 @@ export default function Dashboard({ user, onNavigate, onLogout }) {
         </WoodPanel>
 
         {/* Problems completed */}
-        <WoodPanel>
+        <WoodPanel style={{ boxShadow:'0 0 0 3px #4e342e', border:'none', padding:10 }}>
           <Parchment>
             <div style={{ fontSize:22, marginBottom:8 }}>📋 Problems</div>
             <div style={{ fontSize:48, color:'#5d4037' }}>{completedCount}<span style={{ fontSize:24 }}>/{totalProblems}</span></div>
@@ -65,15 +66,22 @@ export default function Dashboard({ user, onNavigate, onLogout }) {
             </div>
           </Parchment>
         </WoodPanel>
+      </div>
 
-        {/* Quick tip */}
-        <WoodPanel style={{ gridColumn:'1/-1' }}>
+      {/* Layer 2: Algorithm Tip */}
+      <div style={{ maxWidth:1100, margin:'0 auto 16px', width:'100%' }}>
+        <WoodPanel style={{ boxShadow:'0 0 0 3px #4e342e', border:'none', padding:10 }}>
           <Parchment>
             <div style={{ fontSize:22, marginBottom:6 }}>💡 Algorithm Tip</div>
             <div style={{ fontSize:20, color:'#5d4037' }}>{tip}</div>
           </Parchment>
         </WoodPanel>
+      </div>
 
+      <div style={{ flex:1 }} />
+
+      {/* Layer 3: Worlds */}
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap:12, maxWidth:1100, margin:'0 auto 60px', width:'100%' }}>
         {/* World quick-links */}
         {WORLDS.map(world => {
           const done = world.problems.every(p => user.completed.includes(p.id));
@@ -81,21 +89,21 @@ export default function Dashboard({ user, onNavigate, onLogout }) {
             <div key={world.id}
               onClick={() => onNavigate('worlds')}
               style={{
-                cursor:'pointer', padding:2,
+                cursor:'pointer', padding:3,
                 background: `linear-gradient(135deg, ${world.color}66, ${world.color}33)`,
                 border:`3px solid ${world.color}`,
-                borderRadius:3, transition:'transform .2s',
+                borderRadius:4, transition:'transform .2s',
               }}
-              onMouseOver={e => e.currentTarget.style.transform='scale(1.03)'}
+              onMouseOver={e => e.currentTarget.style.transform='scale(1.05)'}
               onMouseOut={e => e.currentTarget.style.transform='scale(1)'}
             >
-              <WoodPanel style={{ background:'transparent', boxShadow:'none', border:'none' }}>
-                <div style={{ fontSize:32 }}>{world.icon}</div>
-                <div style={{ fontSize:20, color:SPRITE_C[6] }}>{world.name}</div>
-                <div style={{ fontSize:16, color:'#d7ccc8', marginBottom:6 }}>
+              <WoodPanel style={{ background:'transparent', boxShadow:'none', border:'none', padding:14, textAlign:'center' }}>
+                <div style={{ fontSize:42 }}>{world.icon}</div>
+                <div style={{ fontSize:22, color:SPRITE_C[6], marginBottom:4 }}>{world.name}</div>
+                <div style={{ fontSize:15, color:'#d7ccc8' }}>
                   {world.problems.filter(p => user.completed.includes(p.id)).length}/{world.problems.length} done
                 </div>
-                {done && <span className="badge-done">✓ CLEAR</span>}
+                {done && <div className="badge-done" style={{ marginTop:6, display:'inline-block' }}>✓ CLEAR</div>}
               </WoodPanel>
             </div>
           );
