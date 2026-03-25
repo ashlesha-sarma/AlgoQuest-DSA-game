@@ -1,0 +1,4 @@
+/* AlgoQuest Global Styles — Pixel Art Theme */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { font-family: 'VT323', monospace; background: #1a0e05; color: #fff9c4; min-height: 100vh; }
+.pixel-art { image-rendering: pixelated; image-rendering: crisp-edges; }
