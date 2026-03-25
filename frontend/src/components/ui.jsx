@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import treeImg from "./algoquest_tree-final.png";
+import playerImg from "./player_character_algoquest.png";
 
 /* ═══════════════════════════════════════════════
    PLAYER SPRITE — 8×12 pixel art farmer
@@ -121,6 +122,26 @@ export function TreeLogo({ size = 80, style }) {
       alt="AlgoQuest"
       className="pixel-art"
       style={{ width: size, height: size, objectFit: 'contain', imageRendering: 'pixelated', ...style }}
+    />
+  );
+}
+/* ═══════════════════════════════════════════════
+   PLAYER CHARACTER — used in games
+═══════════════════════════════════════════════ */
+export function PlayerCharacter({ size = 80, flip = false, style }) {
+  const src = typeof playerImg === 'object' ? playerImg.src : playerImg;
+  return (
+    <img
+      src={src}
+      alt="Player"
+      className="pixel-art"
+      style={{
+        width: size, height: size, objectFit: 'contain', 
+        imageRendering: 'pixelated',
+        transform: flip ? 'scaleX(-1)' : 'scaleX(1)',
+        transition: 'transform .2s',
+        ...style
+      }}
     />
   );
 }

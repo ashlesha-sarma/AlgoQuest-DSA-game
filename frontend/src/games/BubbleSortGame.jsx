@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { WoodPanel, Parchment, PxBtn, FeedbackBanner, FarmerSprite, SPRITE_C } from "../components/ui";
+import { WoodPanel, Parchment, PxBtn, FeedbackBanner, PlayerCharacter, SPRITE_C } from "../components/ui";
 
 /* ═══════════════════════════════════════════════
    GAME 1 — BUBBLE SORT
@@ -113,7 +113,7 @@ export default function BubbleSortGame({ onComplete, addXP }) {
               <div style={{ height:104, overflow:'visible', display:'flex', alignItems:'flex-end', justifyContent:'center' }}>
                 {idx === j && !done && (
                   <div className="anim-walk">
-                    <FarmerSprite sz={2} flip={playerFlip} />
+                    <PlayerCharacter size={96} flip={playerFlip} />
                   </div>
                 )}
               </div>
