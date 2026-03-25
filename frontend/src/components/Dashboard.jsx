@@ -43,17 +43,17 @@ export default function Dashboard({ user, onNavigate, onLogout }) {
       {/* Layer 1: Progress */}
       <div style={{ display:'grid', gridTemplateColumns:'repeat(2, 1fr)', gap:10, maxWidth:1100, margin:'0 auto', width:'100%', marginBottom:16 }}>
         {/* XP & Progress */}
-        <WoodPanel style={{ boxShadow:'0 0 0 3px #4e342e', border:'none', padding:10 }}>
-          <Parchment>
+        <WoodPanel style={{ boxShadow:'0 0 0 3px #4e342e', border:'none', padding:10, display:'flex', flexDirection:'column' }}>
+          <Parchment style={{ flex:1 }}>
             <div style={{ fontSize:22, marginBottom:8 }}>⭐ XP Progress</div>
-            <div style={{ fontSize:36, color:'#5d4037', marginBottom:4 }}>{user.xp} /100 XP</div>
+            <div style={{ fontSize:36, color:'#5d4037', marginBottom:4 }}>{currentXP} / {xpForLevel} XP</div>
             <ProgBar value={currentXP} max={xpForLevel} />
           </Parchment>
         </WoodPanel>
 
         {/* Problems completed */}
-        <WoodPanel style={{ boxShadow:'0 0 0 3px #4e342e', border:'none', padding:10 }}>
-          <Parchment>
+        <WoodPanel style={{ boxShadow:'0 0 0 3px #4e342e', border:'none', padding:10, display:'flex', flexDirection:'column' }}>
+          <Parchment style={{ flex:1 }}>
             <div style={{ fontSize:22, marginBottom:8 }}>📋 Problems</div>
             <div style={{ fontSize:48, color:'#5d4037' }}>{completedCount}<span style={{ fontSize:24 }}>/{totalProblems}</span></div>
             <ProgBar value={completedCount} max={totalProblems} />
