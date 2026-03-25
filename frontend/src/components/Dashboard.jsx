@@ -33,7 +33,7 @@ export default function Dashboard({ user, onNavigate, onLogout }) {
         <div style={{ display:'flex', gap:12, alignItems:'center' }}>
           <div style={{ textAlign:'right' }}>
             <div style={{ fontSize:18, color:SPRITE_C[6] }}>⭐ {user.xp} XP</div>
-            <div style={{ fontSize:16, color:'#d7ccc8' }}>Level {Math.floor(user.xp / xpForLevel) + 1}</div>
+           
           </div>
           <PxBtn variant="grn" onClick={() => onNavigate('worlds')}>🗺️ Play!</PxBtn>
           <PxBtn variant="red" size="sm" onClick={onLogout}>🚪 Logout</PxBtn>
@@ -46,12 +46,8 @@ export default function Dashboard({ user, onNavigate, onLogout }) {
         <WoodPanel style={{ boxShadow:'0 0 0 3px #4e342e', border:'none', padding:10 }}>
           <Parchment>
             <div style={{ fontSize:22, marginBottom:8 }}>⭐ XP Progress</div>
-            <div style={{ fontSize:36, color:'#5d4037', marginBottom:4 }}>{user.xp} / ∞ XP</div>
-            <div style={{ fontSize:18, marginBottom:8, color:'#5d4037' }}>
-              Level {Math.floor(user.xp / xpForLevel) + 1} Adventurer
-            </div>
+            <div style={{ fontSize:36, color:'#5d4037', marginBottom:4 }}>{user.xp} /100 XP</div>
             <ProgBar value={currentXP} max={xpForLevel} />
-            <div style={{ fontSize:15, marginTop:4, color:'#8d6e63' }}>{currentXP}/{xpForLevel} to next level</div>
           </Parchment>
         </WoodPanel>
 

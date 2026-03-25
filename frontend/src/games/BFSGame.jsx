@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { WoodPanel, Parchment, PxBtn, FeedbackBanner, SPRITE_C } from "../components/ui";
+import { WoodPanel, Parchment, PxBtn, FeedbackBanner, PlayerCharacter, SPRITE_C } from "../components/ui";
 
 /* ═══════════════════════════════════════════════
    GAME 4 — BFS TRAVERSAL
@@ -121,6 +121,13 @@ export default function BFSGame({ onComplete, addXP }) {
                   >{node.label}</text>
                   {isNext && (
                     <text x={node.x+28} y={node.y+12} textAnchor="middle" fill="#ffd700" fontSize={14} fontFamily="'VT323',monospace">★next</text>
+                  )}
+                  {isCurrent && (
+                    <foreignObject x={node.x + 3} y={node.y - 45} width={50} height={50}>
+                      <div className="anim-float">
+                        <PlayerCharacter size={50} />
+                      </div>
+                    </foreignObject>
                   )}
                 </g>
               );
