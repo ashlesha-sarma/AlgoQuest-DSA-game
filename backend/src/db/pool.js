@@ -1,12 +1,15 @@
 const { Pool } = require('pg');
 
 const connectionString = process.env.DATABASE_URL;
+const isProd = process.env.NODE_ENV === 'production';
 
 const pool = new Pool({
   connectionString,
   max: 10,
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 5000,
+  // Most hosted DBs (Neon, Supabase) require SSL for connections
+  ssl: isProd ? { rejectUnauthorized: false } : false,
 });
 
 pool.on('error', (error) => {
