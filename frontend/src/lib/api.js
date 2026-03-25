@@ -5,16 +5,22 @@ export function getStoredToken() {
   return typeof window !== 'undefined' ? localStorage.getItem(TOKEN_KEY) : null;
 }
 
-export function saveSession(token) {
+export function saveSession(token, name) {
   if (typeof window !== 'undefined') {
     localStorage.setItem(TOKEN_KEY, token);
+    if (name) localStorage.setItem('aq_name', name);
   }
 }
 
 export function clearSession() {
   if (typeof window !== 'undefined') {
     localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem('aq_name');
   }
+}
+
+export function getStoredName() {
+  return typeof window !== 'undefined' ? localStorage.getItem('aq_name') : null;
 }
 
 async function request(path, options = {}) {

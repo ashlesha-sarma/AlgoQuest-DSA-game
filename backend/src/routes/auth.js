@@ -8,7 +8,7 @@ function buildUser(row, completed = []) {
   return {
     id: row.id,
     email: row.email,
-    name: row.email.split('@')[0],
+    name: row.name || row.email.split('@')[0],
     xp: row.xp,
     currentWorld: row.current_world,
     completed,
@@ -17,7 +17,7 @@ function buildUser(row, completed = []) {
 
 router.post('/signup', async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { name, email, password } = req.body;
 
     if (!email || !password) {
       return res.status(400).json({ error: 'Email and password are required.' });
@@ -28,6 +28,7 @@ router.post('/signup', async (req, res) => {
     }
 
     const normalizedEmail = email.trim().toLowerCase();
+    const safeName = (name || '').trim() || normalizedEmail.split('@')[0];
     const existingUser = await query('SELECT id FROM users WHERE email = $1', [normalizedEmail]);
 
     if (existingUser.rows.length > 0) {
@@ -37,11 +38,11 @@ router.post('/signup', async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const result = await query(
       `
-        INSERT INTO users (email, password)
-        VALUES ($1, $2)
-        RETURNING id, email, xp, current_world
+        INSERT INTO users (email, name, password)
+        VALUES ($1, $2, $3)
+        RETURNING id, email, name, xp, current_world
       `,
-      [normalizedEmail, hashedPassword]
+      [normalizedEmail, safeName, hashedPassword]
     );
 
     const user = result.rows[0];
@@ -68,7 +69,7 @@ router.post('/login', async (req, res) => {
     const normalizedEmail = email.trim().toLowerCase();
     const result = await query(
       `
-        SELECT id, email, password, xp, current_world
+        SELECT id, email, name, password, xp, current_world
         FROM users
         WHERE email = $1
       `,
@@ -112,7 +113,7 @@ router.get('/me', auth, async (req, res) => {
   try {
     const userResult = await query(
       `
-        SELECT id, email, xp, current_world
+        SELECT id, email, name, xp, current_world
         FROM users
         WHERE id = $1
       `,
