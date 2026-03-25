@@ -18,6 +18,7 @@ async function initializeDatabase() {
       CREATE TABLE IF NOT EXISTS users (
         id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
         email VARCHAR(255) UNIQUE NOT NULL,
+        name VARCHAR(255) NOT NULL DEFAULT '',
         password TEXT NOT NULL,
         xp INTEGER NOT NULL DEFAULT 0,
         current_world INTEGER NOT NULL DEFAULT 1,
@@ -47,6 +48,18 @@ async function initializeDatabase() {
         updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
         UNIQUE(user_id, problem_id)
       )
+    `);
+
+    await client.query(`
+      ALTER TABLE users
+      ADD COLUMN IF NOT EXISTS name VARCHAR(255) NOT NULL DEFAULT ''
+    `);
+
+    // Backfill names for existing users who might have NULL if they were created before this update
+    await client.query(`
+      UPDATE users 
+      SET name = SPLIT_PART(email, '@', 1) 
+      WHERE name IS NULL OR name = ''
     `);
 
     await client.query(`
