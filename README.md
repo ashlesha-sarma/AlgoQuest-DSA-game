@@ -1,151 +1,63 @@
-# AlgoQuest
+# AlgoQuest  
+Gamified platform to practice Data Structures & Algorithms through interactive challenges
 
-AlgoQuest is a gamified DSA learning app with:
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Available-green?style=for-the-badge&logo=vercel)](https://algo-quest-dsa-game.vercel.app)
 
-- `frontend/`: Next.js app running on `http://localhost:3000`
-- `backend/`: Express API running on `http://localhost:5000`
-- `database/`: PostgreSQL schema reference
+---
 
-Docker is not used anywhere in this project.
+### 🧱 Tech Stack
 
-## Local Requirements
+![React](https://img.shields.io/badge/Frontend-React-20232A?style=for-the-badge&logo=react)
+![Node.js](https://img.shields.io/badge/Backend-Node.js-339933?style=for-the-badge&logo=nodedotjs)
+![Express](https://img.shields.io/badge/API-Express-000000?style=for-the-badge&logo=express)
+![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL-316192?style=for-the-badge&logo=postgresql)
+![Render](https://img.shields.io/badge/Deployment-Render-46E3B7?style=for-the-badge&logo=render)
+![Vercel](https://img.shields.io/badge/Frontend%20Hosting-Vercel-000000?style=for-the-badge&logo=vercel)
 
-- Node.js 18 or newer
-- PostgreSQL 14 or newer
+---
 
-## First-Time Setup
+### 🧠 Problem
 
-### 1. Install PostgreSQL
+Traditional DSA practice platforms are static and lack engagement, making it difficult for learners to stay consistent and track meaningful progress.
 
-Install PostgreSQL locally and make sure the server is running.
+---
 
-### 2. Create the database
+### 💡 Solution
 
-Open `psql` or pgAdmin and create the database:
+AlgoQuest transforms DSA practice into a gamified experience where users solve problems, progress through levels, and receive structured feedback.
 
-```sql
-CREATE DATABASE algoquest;
-```
+---
 
-### 3. Backend environment
+### ✨ Features
 
-The backend already includes a local `.env` file:
+- Gamified DSA problem-solving (levels, progression)  
+- Categorized questions (arrays, trees, graphs, etc.)  
+- User authentication and progress tracking  
+- Real-time feedback on submissions  
+- Persistent leaderboard / scoring system  
 
-```env
-PORT=5000
-DATABASE_URL=postgresql://postgres:password@localhost:5432/algoquest
-JWT_SECRET=your_secret
-FRONTEND_URL=http://localhost:3000
-```
+---
 
-Update the `DATABASE_URL` only if your local PostgreSQL username, password, or port is different.
+### 🏗️ Architecture
 
-### 4. Frontend environment
+Client (React) → API (Node.js / Express) → PostgreSQL
 
-The frontend already includes a local `.env.local` file:
+---
 
-```env
-NEXT_PUBLIC_API_URL=http://localhost:5000
-```
-
-## Run the Project
-
-### 1. Install backend dependencies
+### ⚙️ Setup
 
 ```bash
-cd backend
+git clone https://github.com/your-username/algoquest.git
+cd algoquest
+
+# install dependencies
 npm install
-```
 
-### 2. Start the backend
+# setup environment variables
+cp .env.example .env
 
-```bash
-npm run dev
-```
+# run backend
+npm run server
 
-What happens on startup:
-
-- Connects to local PostgreSQL using `DATABASE_URL`
-- Creates the `users`, `problems`, and `progress` tables if they do not exist
-- Seeds the built-in AlgoQuest problems automatically
-
-### 3. Install frontend dependencies
-
-Open a second terminal:
-
-```bash
-cd frontend
-npm install
-```
-
-### 4. Start the frontend
-
-```bash
-npm run dev
-```
-
-Then open `http://localhost:3000`.
-
-## Database Tables
-
-The backend auto-creates these tables:
-
-- `users`
-  - `id`
-  - `email`
-  - `password`
-  - `xp`
-  - `current_world`
-- `problems`
-  - `id`
-  - `title`
-  - `world`
-  - `type`
-- `progress`
-  - `id`
-  - `user_id`
-  - `problem_id`
-  - `completed`
-
-## Useful Endpoints
-
-- `GET /health`
-- `POST /api/auth/signup`
-- `POST /api/auth/login`
-- `GET /api/auth/me`
-- `GET /api/problems`
-- `GET /api/progress`
-- `POST /api/progress/complete`
-- `GET /api/progress/leaderboard`
-
-## Project Structure
-
-```text
-algoquest/
-|-- backend/
-|   |-- .env
-|   |-- .env.example
-|   |-- package.json
-|   |-- server.js
-|   `-- src/
-|       |-- db/
-|       |   |-- init.js
-|       |   `-- pool.js
-|       |-- middleware/
-|       |   `-- auth.js
-|       `-- routes/
-|           |-- auth.js
-|           |-- problems.js
-|           `-- progress.js
-|-- database/
-|   `-- schema.sql
-`-- frontend/
-    |-- .env.local
-    |-- .env.local.example
-    |-- package.json
-    |-- next.config.js
-    `-- src/
-        |-- app/
-        |-- components/
-        `-- lib/
-```
+# run frontend
+npm run client
